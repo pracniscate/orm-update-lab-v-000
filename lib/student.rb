@@ -62,7 +62,7 @@ class Student
     # use the #new_from_db method to instantiate a Student object with the database row that the SQL query returns
     DB[:conn].execute(sql, name).map do |row|
       self.new_from_db(row)
-    end
+    end.first
   end
 
   def self.create(name, grade)
