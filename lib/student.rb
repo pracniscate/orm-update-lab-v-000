@@ -64,8 +64,8 @@ class Student
     # use the #new_from_db method to instantiate a Student object with the database row that the SQL query returns
   end
 
-  def self.create(name:, grade:)
-    student = Student.new(:name, :grade)
+  def self.create(name, grade)
+    student = Student.new(name, grade)
     student.save
     student
   end
