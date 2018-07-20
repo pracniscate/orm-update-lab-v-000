@@ -50,6 +50,20 @@ class Student
     DB[:conn].execute(sql, self.name, self.grade, self.name)
   end
 
+  def self.new_from_db(array)
+    # convert database data into a Ruby object 
+    new_student = self.new 
+    new_student.id = array[0]
+    new_student.name = array[1]
+    new_student.length array[2]
+    new_student
+  end
+
+  def self.find_by_name(name)
+    # query the database table for a record that has a name of the name passed in as an argument
+    # use the #new_from_db method to instantiate a Student object with the database row that the SQL query returns
+  end
+
   def self.create(name:, grade:)
     student = Student.new(name, grade)
     student.save
