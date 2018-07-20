@@ -28,16 +28,21 @@ class Student
   end
 
   def save
-    # insert a new row into the database
-    sql = <<-SQL
-      INSERT INTO students (name, grade)
-      VALUES (?, ?)
-    SQL
+    # update a record if called on an object that is already persisted
+    if self.id 
+      self.update
+    else
+      # insert a new row into the database
+      sql = <<-SQL
+        INSERT INTO students (name, grade)
+        VALUES (?, ?)
+      SQL
 
-    DB[:conn].execute(sql, self.name, self.grade)
+      DB[:conn].execute(sql, self.name, self.grade)
 
-    # assign the id attribute
-    @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
+      # assign the id attribute
+      @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
+    end
   end
 
 end
