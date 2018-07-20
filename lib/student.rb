@@ -58,7 +58,11 @@ class Student
 
   def self.find_by_name(name)
     # query the database table for a record that has a name of the name passed in as an argument
+    sql = "SELECT * FROM students WHERE name = ?"
     # use the #new_from_db method to instantiate a Student object with the database row that the SQL query returns
+    DB[:conn].execute(sql, name).map do |row|
+      self.new_from_db(row)
+    end
   end
 
   def self.create(name, grade)
