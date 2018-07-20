@@ -51,8 +51,8 @@ class Student
   end
 
   def self.new_from_db(array)
-    # convert database data into a Ruby object 
-    new_student = self.new 
+    # convert database data into a Ruby object
+    new_student = self.new
     new_student.id = array[0]
     new_student.name = array[1]
     new_student.length array[2]
